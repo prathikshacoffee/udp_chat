@@ -33,9 +33,9 @@ bool serverConnect(){
 	std::cout<<"server_conntect called"<<std::endl;
 
     // Creating socket file descriptor 
-    if ( (sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
-        perror("socket creation failed"); 
-        exit(EXIT_FAILURE); 
+    sock = socket(AF_INET, SOCK_DGRAM, 0);
+    if ( sock < 0 ) { 
+        return false; 
     } 
 
     memset(&servaddr, 0, sizeof(servaddr)); 
@@ -47,8 +47,8 @@ bool serverConnect(){
 
     if (bind(sock, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
 	{
-		perror("bind failed");
-		exit(EXIT_FAILURE);
+
+		return false;
 	}
         
     // close(sock); 
